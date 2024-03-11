@@ -46,19 +46,15 @@ public class TodoAppSkyTests {
         HttpResponse createResponse = createTask();
         assertEquals(201, createResponse.getStatusLine().getStatusCode());
 
-        // Проверить тип контента в заголовке
         Header contentTypeHeader = createResponse.getFirstHeader("Content-Type");
         assertTrue(contentTypeHeader.getValue().contains("application/json"));
 
-        // Проверить, что тело ответа не null
         HttpEntity createResponseEntity = createResponse.getEntity();
         assertNotNull(createResponseEntity);
 
-        // Преобразовать тело ответа в строку JSON
         String createResponseBody = EntityUtils.toString(createResponseEntity);
         assertNotNull(createResponseBody);
 
-        // Проверить, что JSON содержит "sheep"
         assertTrue(createResponseBody.contains("sheep"));
 
         String taskId = extractTaskId(createResponseBody);
@@ -66,11 +62,9 @@ public class TodoAppSkyTests {
         HttpResponse deleteResponse = deleteTask(taskId);
         assertEquals(204, deleteResponse.getStatusLine().getStatusCode());
 
-        // Проверить тип контента в заголовке
         Header contentTypeHeaderDelete = deleteResponse.getFirstHeader("Content-Type");
         assertTrue(contentTypeHeaderDelete.getValue().contains("application/json"));
 
-        // Проверить, что тело ответа не null
         HttpEntity responseEntityDelete = deleteResponse.getEntity();
         assertNull(responseEntityDelete);
     }
@@ -89,19 +83,15 @@ public class TodoAppSkyTests {
 
         assertEquals(200, renameResponse.getStatusLine().getStatusCode());
 
-        // Проверить тип контента в заголовке
         Header contentTypeHeader = renameResponse.getFirstHeader("Content-Type");
         assertTrue(contentTypeHeader.getValue().contains("application/json"));
 
-        // Проверить, что тело ответа не null
         HttpEntity createResponseEntityRename = renameResponse.getEntity();
         assertNotNull(createResponseEntity);
 
-        // Преобразовать тело ответа в строку JSON
         String createResponseBodyRename = EntityUtils.toString(createResponseEntityRename);
         assertNotNull(createResponseBody);
 
-        // Проверить, что JSON содержит "sheep"
         assertTrue(createResponseBodyRename.contains("wolf"));
 
         HttpResponse deleteResponse = deleteTask(taskId);
@@ -122,20 +112,17 @@ public class TodoAppSkyTests {
         HttpResponse doneResponse = doneTask(taskId);
 
         assertEquals(200, doneResponse.getStatusLine().getStatusCode());
-//
-        // Проверить тип контента в заголовке
+
         Header contentTypeHeader = doneResponse.getFirstHeader("Content-Type");
         assertTrue(contentTypeHeader.getValue().contains("application/json"));
-//
-        // Проверить, что тело ответа не null
+
         HttpEntity createResponseEntityDone = doneResponse.getEntity();
         assertNotNull(createResponseEntityDone);
 
-        // Преобразовать тело ответа в строку JSON
+
         String createResponseBodyDone = EntityUtils.toString(createResponseEntityDone);
         assertNotNull(createResponseBodyDone);
-//
-//        // Проверить, что JSON содержит "sheep"
+
         assertTrue(createResponseBodyDone.contains("\"completed\":true"));
 
         HttpResponse deleteResponse = deleteTask(taskId);
@@ -159,7 +146,6 @@ public class TodoAppSkyTests {
         HttpEntity createAllTasksResponse = getAllTasksResponse.getEntity();
         assertNotNull(createAllTasksResponse);
 
-        // Преобразовать тело ответа в строку JSON
         String createAllTasksResponseBody = EntityUtils.toString(createAllTasksResponse);
         assertNotNull(createAllTasksResponseBody);
 
